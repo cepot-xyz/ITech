@@ -1,0 +1,104 @@
+{
+  "products": [
+    {
+      "id": "l1",
+      "name": "ASUS VivoBook 14 K413",
+      "brand": "ASUS",
+      "price": 8499000,
+      "specs": {
+        "cpu": "Intel Core i5-1135G7",
+        "gpu": "Intel Iris Xe",
+        "ram": 8,
+        "storage": 512,
+        "storage_type": "ssd",
+        "screen_size": 14,
+        "weight": 1.4,
+        "battery": 42
+      },
+      "url": "https://asus.com/id/laptops/for-home/vivobook/vivobook-14-k413/",
+      "img": "vivobook-k413.jpg",
+      "category": ["productivity", "student"],
+      "description": "Laptop ringan dan portabel dengan performa seimbang untuk produktivitas sehari-hari"
+    },
+    {
+      "id": "l2",
+      "name": "Lenovo Legion 5 Pro",
+      "brand": "Lenovo",
+      "price": 19999000,
+      "specs": {
+        "cpu": "AMD Ryzen 7 5800H",
+        "gpu": "NVIDIA RTX 3060 6GB",
+        "ram": 16,
+        "storage": 1000,
+        "storage_type": "ssd",
+        "screen_size": 16,
+        "weight": 2.45,
+        "battery": 80
+      },
+      "url": "https://www.lenovo.com/id/in/laptops/legion/legion-5-series/Legion-5-Pro-16ACH6H/p/WMD00000468",
+      "img": "legion-5-pro.jpg",
+      "category": ["gaming", "content"],
+      "description": "Laptop gaming premium dengan layar 16\" WQXGA dan performa tinggi untuk gaming dan content creation"
+    },
+    {
+      "id": "l3",
+      "name": "Acer Swift 3",
+      "brand": "Acer",
+      "price": 7299000,
+      "specs": {
+        "cpu": "AMD Ryzen 5 5500U",
+        "gpu": "AMD Radeon Graphics",
+        "ram": 8,
+        "storage": 512,
+        "storage_type": "ssd",
+        "screen_size": 14,
+        "weight": 1.2,
+        "battery": 56
+      },
+      "url": "https://acer.com/id/id/laptops/swift/swift-3/",
+      "img": "swift-3.jpg",
+      "category": ["productivity", "student"],
+      "description": "Ultra-portable dengan baterai tahan lama dan performa efisien untuk mobilitas maksimal"
+    },
+    {
+      "id": "l4",
+      "name": "ROG Zephyrus G14",
+      "brand": "ASUS",
+      "price": 21999000,
+      "specs": {
+        "cpu": "AMD Ryzen 9 5900HS",
+        "gpu": "NVIDIA RTX 3060 6GB",
+        "ram": 16,
+        "storage": 1000,
+        "storage_type": "ssd",
+        "screen_size": 14,
+        "weight": 1.7,
+        "battery": 76
+      },
+      "url": "https://rog.asus.com/id/laptops/rog-zephyrus/rog-zephyrus-g14-series/",
+      "img": "zephyrus-g14.jpg",
+      "category": ["gaming", "content"],
+      "description": "Gaming laptop kompak dengan performa tinggi dan portabilitas premium"
+    },
+    {
+      "id": "l5",
+      "name": "ThinkPad E14 Gen 3",
+      "brand": "Lenovo",
+      "price": 11499000,
+      "specs": {
+        "cpu": "AMD Ryzen 7 5700U",
+        "gpu": "AMD Radeon Graphics",
+        "ram": 16,
+        "storage": 512,
+        "storage_type": "ssd",
+        "screen_size": 14,
+        "weight": 1.64,
+        "battery": 57
+      },
+      "url": "https://www.lenovo.com/id/in/laptops/thinkpad/thinkpad-e-series/E14-G3-14-inch-AMD/p/22TPE14E4A3",
+      "img": "thinkpad-e14.jpg",
+      "category": ["business", "productivity"],
+      "description": "Business laptop andal dengan dukungan fitur keamanan ThinkPad"
+    }
+  ]
+}
