@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITech - Temukan Perangkat Terbaik Anda</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="components/warning-panel.js"></script>
+    <script src="components/navbar.js"></script>
+</head>
+    <body class="bg-gray-900 text-gray-100 font-montserrat min-h-screen">
+    <custom-navbar></custom-navbar>
+    <!-- Resume banner placeholder (filled by script if progress exists) -->
+    <div id="resumeBannerContainer" class="container mx-auto max-w-4xl mt-4 px-4"></div>
+    <!-- Main Content Start -->
+    <main class="px-4 pb-16">
+        <div class="container mx-auto max-w-4xl">
+            <!-- Quiz Selection Cards Start -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <!-- Laptop Quiz Card -->
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-900/20">
+                    <div class="flex flex-col h-full">
+                        <div class="flex-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-blue-400 mb-4">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="2" y1="20" x2="22" y2="20"></line>
+                            </svg>
+<h3 class="text-2xl font-semibold mb-2">Lagi nyari laptop?</h3>
+                            <p class="text-gray-400 mb-6">Ikuti kuis singkat kami untuk menemukan laptop perfect match untuk kebutuhanmu</p>
+                        </div>
+                        <a href="kuis-laptop.html" class="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-medium py-3 px-6 rounded-lg text-center transition-all duration-300 hover:shadow-blue-500/30 hover:shadow-lg btn-donate">
+                            Mulai Kuis Laptop
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Computer Quiz Card -->
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-900/20">
+                    <div class="flex flex-col h-full">
+                        <div class="flex-1">
+                            <i data-feather="cpu" class="w-12 h-12 text-blue-400 mb-4"></i>
+                            <h3 class="text-2xl font-semibold mb-2">Atau lagi nyari komputer?</h3>
+                            <p class="text-gray-400 mb-6">Jawab beberapa pertanyaan untuk mendapatkan rekomendasi PC sesuai budget dan kebutuhan</p>
+                        </div>
+                        <a href="kuis-komputer.html" class="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-medium py-3 px-6 rounded-lg text-center transition-all duration-300 hover:shadow-blue-500/30 hover:shadow-lg btn-donate">
+                            Mulai Kuis Komputer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Quiz Selection Cards End -->
+        </div>
+    </main>
+    <!-- Main Content End -->
+
+    <!-- Footer Start -->
+    <footer class="py-8 px-4">
+        <div class="container mx-auto max-w-6xl text-center text-white">
+            <p>Sistem Pakar | ITech @2025 | All Rights Reserved</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+    <script>
+        // show resume banner when there is saved progress
+        (function() {
+            try {
+                const last = localStorage.getItem('last_quiz');
+                if (!last) return;
+                const key = `quiz_answers_${last}`;
+                const raw = localStorage.getItem(key);
+                if (!raw) return;
+                const data = JSON.parse(raw);
+                if (!data || !Array.isArray(data.answers)) return;
+                const answered = data.answers.filter(a => a !== null).length;
+                const total = data.answers.length;
+                if (answered === 0 || answered === total) return; // nothing to resume
+
+                const container = document.getElementById('resumeBannerContainer');
+                if (!container) return;
+                // map quiz key to actual filename (keeps compatibility with existing files)
+                const quizFileMap = {
+                    laptop: 'kuis laptop.html',
+                    computer: 'kuis komputer.html'
+                };
+                const target = quizFileMap[last] || `kuis ${last}.html`;
+                container.innerHTML = `
+                    <div class="bg-blue-900/80 border border-blue-700 text-white rounded-lg p-4 flex items-center justify-between">
+                        <div>
+                            <strong>Lanjutkan kuis terakhir</strong>
+                            <div class="text-sm text-blue-100">${answered} dari ${total} pertanyaan terjawab — Lanjutkan dari tempat terakhir Anda</div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <a href="${target}" id="resumeBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-md text-white">Lanjutkan</a>
+                            <button id="clearProgressBtn" class="px-3 py-2 bg-transparent border border-blue-600 text-blue-100 rounded-md">Hapus</button>
+                        </div>
+                    </div>
+                `;
+
+                const clear = document.getElementById('clearProgressBtn');
+                if (clear) clear.addEventListener('click', () => {
+                    try { localStorage.removeItem(key); localStorage.removeItem('last_quiz'); container.innerHTML = ''; } catch(e){ console.warn(e); }
+                });
+            } catch (e) { /* ignore parsing errors */ }
+        })();
+    </script>
+</body>
+</html>

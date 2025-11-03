@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    min-height: 100vh;
+    /* Use local image from img/ folder if available */
+    background-image: url('img/Background.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Dark overlay for better readability (60% opacity) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* overlay with ~60% darkness to dim the background image */
+    background: linear-gradient(rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.6));
+    z-index: 1;
+}
+
+/* Ensure content stays above overlay */
+main, header, footer, .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Keep the navbar (and its shadow DOM modal) above other content so modals are visible */
+custom-navbar {
+    position: relative;
+    z-index: 2000; /* must be higher than other page elements and the modal z-index inside the shadow DOM */
+}
+
+/* Preload hint for background */
+.preload-background {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    z-index: -1;
+}
+
+/* Golden Ratio Typography Scale */
+h1 {
+    font-size: 2.618rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.618rem;
+    line-height: 1.3;
+}
+
+h3 {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Custom Glow Effects */
+.glow-effect {
+    transition: all 0.3s ease;
+}
+
+.glow-effect:hover {
+    box-shadow: 0 0 15px rgba(39, 100, 243, 0.3);
+}
+
+/* Quiz Card Styles */
+.quiz-card {
+    border: 1px solid #2f3136;
+    transition: all 0.3s ease;
+}
+
+.quiz-card:hover {
+    border-color: #2764f3;
+    box-shadow: 0 10px 25px -5px rgba(22, 60, 144, 0.1);
+}
+
+/* Button Styles */
+.btn-primary {
+    background: linear-gradient(135deg, #163c90, #2764f3);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2764f3, #163c90);
+    transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* --- Imported example button styles (from Example from internet/example.css) --- */
+/* From Uiverse.io by Allyhere */
+.btn-donate {
+    --clr-font-main: hsla(0 0% 20% / 100);
+    --btn-bg-1: hsla(194 100% 69% / 1);
+    --btn-bg-2: hsla(217 100% 56% / 1);
+    --btn-bg-color: hsla(360 100% 100% / 1);
+    --radii: 0.5em;
+    cursor: pointer;
+    padding: 0.9em 1.4em;
+    min-width: 120px;
+    min-height: 44px;
+    font-size: var(--size, 1rem);
+    font-weight: 500;
+    transition: 0.8s;
+    background-size: 280% auto;
+    background-image: linear-gradient(
+        325deg,
+        var(--btn-bg-2) 0%,
+        var(--btn-bg-1) 55%,
+        var(--btn-bg-2) 90%
+    );
+    border: none;
+    border-radius: var(--radii);
+    color: var(--btn-bg-color);
+    box-shadow:
+        0px 0px 20px rgba(71, 184, 255, 0.5),
+        0px 5px 5px -1px rgba(58, 125, 233, 0.25),
+        inset 4px 4px 8px rgba(175, 230, 255, 0.5),
+        inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+}
+
+.btn-donate:hover {
+    background-position: right top;
+}
+
+.btn-donate:is(:focus, :focus-visible, :active) {
+    outline: none;
+    box-shadow:
+        0 0 0 3px var(--btn-bg-color),
+        0 0 0 6px var(--btn-bg-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-donate {
+        transition: linear;
+    }
+}
+
+/* --- end imported example styles --- */
+
+/* Accessibility helpers */
+.sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+}
+
+/* Quiz answer states and focus styles */
+.answer-options .quiz-answer {
+    display: block;
+    border: 1px solid rgba(255,255,255,0.04);
+    background: #1f2937; /* fallback */
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.answer-options .quiz-answer:hover {
+    transform: translateY(-2px);
+}
+
+.answer-options .quiz-answer.selected {
+    background: linear-gradient(90deg,#163c90,#2764f3);
+    border-color: rgba(39,100,243,0.9);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(23,76,188,0.14);
+}
+
+.answer-options .quiz-answer:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
+}
+
+/* ensure touch targets are large enough on mobile */
+.answer-options .quiz-answer { padding: 1rem; min-height: 48px; }
+
+@media (max-width: 640px) {
+    .answer-options .quiz-answer { padding: 1.1rem; min-height: 54px; }
+}

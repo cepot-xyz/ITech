@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Laptop - ITech</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="components/warning-panel.js"></script>
+    <script src="components/navbar.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-montserrat min-h-screen">
+    <custom-navbar></custom-navbar>
+
+    <!-- Quiz Container Start -->
+    <main id="quizMain" data-quiz="laptop" class="py-12 px-4 sm:px-8">
+        <div class="container mx-auto max-w-4xl">
+            <!-- Progress Bar Start -->
+            <div class="mb-8">
+                <div class="flex justify-between mb-2">
+                    <span class="text-sm text-gray-400">Progress</span>
+                    <span id="progressText" class="text-sm text-blue-400">1/5</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-2.5">
+                    <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 20%"></div>
+                </div>
+            </div>
+            <!-- Progress Bar End -->
+
+            <!-- Question Block Start -->
+            <div id="questionContainer" class="bg-gray-800 rounded-xl p-6 md:p-8 border border-gray-700 shadow-lg">
+                <!-- question content will be injected by script.js -->
+            </div>
+            <!-- Question Block End -->
+
+            <!-- Navigation Buttons Start -->
+            <div class="flex justify-between mt-8">
+                <button id="backBtn" type="button" class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-all duration-300 btn-donate">
+                    Kembali
+                </button>
+                <button id="nextBtn" type="button" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-all duration-300 glow-effect btn-donate">
+                    Lanjut
+                </button>
+            </div>
+            <!-- Navigation Buttons End -->
+        </div>
+    </main>
+    <!-- Quiz Container End -->
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
