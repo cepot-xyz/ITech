@@ -1,0 +1,256 @@
+
+[
+  {
+    "id": "primary_use",
+    "text": "Apa tujuan utama penggunaan komputer Anda?",
+    "options": ["Pekerjaan kantor & Browsing", "Desain / Video Editing", "Gaming AAA", "Live Streaming"],
+    "logic_type": "SPECS_WEIGHT",
+    "logic_data": { "cpu_score": [1, 3, 2, 3], "gpu_score": [1, 3, 3, 3], "ram_score": [1, 3, 2, 3] }
+  },
+  {
+    "id": "budget_range",
+    "text": "Berapa total budget Anda untuk CPU, Motherboard, RAM, dan VGA?",
+    "options": ["Di bawah 10 juta", "10 - 20 juta", "20 - 35 juta", "Di atas 35 juta"],
+    "logic_type": "BUDGET_FILTER",
+    "logic_data": { "max_price": [10000000, 20000000, 35000000, 999999999] }
+  },
+  {
+    "id": "cpu_brand",
+    "text": "Preferensi merek prosesor (CPU)?",
+    "options": ["Intel", "AMD", "Tidak ada preferensi"],
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "processor", "column": "nama_produk", "values": ["%Intel%", "%AMD%", null] }
+  },
+  {
+    "id": "cpu_tier_intel",
+    "text": "Jika Intel, seri apa yang Anda inginkan?",
+    "options": ["Core i3/i5", "Core i7", "Core i9"],
+    "condition": { "id": "cpu_brand", "value": 0 },
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "processor", "column": "nama_produk", "values": ["%i3%", "%i7%", "%i9%"] }
+  },
+  {
+    "id": "cpu_tier_amd",
+    "text": "Jika AMD, seri apa yang Anda inginkan?",
+    "options": ["Ryzen 3/5", "Ryzen 7", "Ryzen 9 / Threadripper"],
+    "condition": { "id": "cpu_brand", "value": 1 },
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "processor", "column": "nama_produk", "values": ["%Ryzen 5%", "%Ryzen 7%", "%Ryzen 9%"] }
+  },
+  {
+    "id": "gpu_brand",
+    "text": "Preferensi merek kartu grafis (VGA)?",
+    "options": ["NVIDIA", "AMD", "Tidak ada preferensi"],
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "vga", "column": "chipset", "values": ["%NVIDIA%", "%AMD%", null] }
+  },
+  {
+    "id": "gpu_tier_nvidia",
+    "text": "Jika NVIDIA, seri apa yang Anda inginkan?",
+    "options": ["Seri RTX 30xx/4060", "Seri RTX 4070", "Seri RTX 4080/4090"],
+    "condition": { "id": "gpu_brand", "value": 0 },
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "vga", "column": "chipset", "values": ["%RTX 4060%", "%RTX 4070%", "%RTX 4090%"] }
+  },
+  {
+    "id": "gpu_vram",
+    "text": "Berapa minimal VRAM pada kartu grafis yang Anda butuhkan?",
+    "options": ["8 GB", "12 GB", "16 GB atau lebih"],
+    "logic_type": "SPECS_MATCH",
+    "logic_data": { "table": "vga", "column": "vram", "min_value": [8, 12, 16] }
+  },
+  {
+    "id": "ram_capacity",
+    "text": "Berapa kapasitas RAM yang Anda inginkan?",
+    "options": ["16 GB", "32 GB", "64 GB atau lebih"],
+    "logic_type": "SPECS_MATCH",
+    "logic_data": { "table": "ram", "column": "kapasitas", "min_value": [16, 32, 64] }
+  },
+  {
+    "id": "ram_type",
+    "text": "Tipe RAM yang Anda preferensikan?",
+    "options": ["DDR4", "DDR5"],
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "ram", "column": "tipe", "values": ["DDR 4", "DDR 5"] }
+  },
+  {
+    "id": "storage_type",
+    "text": "Tipe penyimpanan utama yang Anda inginkan?",
+    "options": ["SSD SATA", "SSD NVMe Gen 3/4", "SSD NVMe Gen 5 (Tercepat)"],
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "penyimpanan", "column": "tipe", "values": ["%SATA%", "%NVMe%", "%Gen5%"] }
+  },
+  {
+    "id": "storage_capacity",
+    "text": "Berapa kapasitas penyimpanan utama yang Anda butuhkan?",
+    "options": ["512 GB", "1 TB", "2 TB atau lebih"],
+    "logic_type": "SPECS_MATCH",
+    "logic_data": { "table": "penyimpanan", "column": "kapasitas", "min_value": [512, 1000, 2000] }
+  },
+  {
+    "id": "case_size",
+    "text": "Ukuran casing komputer yang Anda inginkan?",
+    "options": ["Kecil (Mini-ITX)", "Sedang (Micro-ATX)", "Besar (ATX)"],
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "motherboard", "column": "form_factor", "values": ["mIATX", "mATX", "ATX"] }
+  },
+  {
+    "id": "aesthetic_rgb",
+    "text": "Apakah Anda menyukai komponen dengan lampu RGB?",
+    "options": ["Ya, sangat suka", "Sedikit saja tidak apa-apa", "Tidak, lebih suka tanpa RGB"],
+    "logic_type": "SPECS_WEIGHT",
+    "logic_data": { "aesthetic_score": [2, 1, 0] }
+  },
+  {
+    "id": "psu_wattage",
+    "text": "Perkiraan daya (watt) PSU yang Anda butuhkan?",
+    "options": ["550W - 650W", "750W - 850W", "1000W atau lebih"],
+    "logic_type": "SPECS_MATCH",
+    "logic_data": { "table": "psu", "column": "daya", "min_value": [550, 750, 1000] }
+  },
+  {
+    "id": "cpu_cores",
+    "text": "Berapa jumlah core CPU minimal yang Anda targetkan?",
+    "options": ["4-6 Cores", "8-12 Cores", "16 Cores atau lebih"],
+    "logic_type": "SPECS_MATCH",
+    "logic_data": { "table": "processor", "column": "jumlah_core", "min_value": [4, 8, 16] }
+  },
+  {
+    "id": "motherboard_chipset",
+    "text": "Chipset motherboard yang Anda preferensikan?",
+    "options": ["Entry-level (Seri H/A)", "Mid-range (Seri B)", "High-end (Seri Z/X)"],
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "motherboard", "column": "chipset", "values": ["%H610%", "%B760%", "%Z790%"] }
+  },
+  {
+    "id": "ram_speed",
+    "text": "Seberapa penting kecepatan RAM (MHz) bagi Anda?",
+    "options": ["Standar (4800-5600 MHz)", "Tinggi (6000 MHz ke atas)"],
+    "logic_type": "SPECS_MATCH",
+    "logic_data": { "table": "ram", "column": "kecepatan", "min_value": [4800, 6000] }
+  },
+  {
+    "id": "cooling_type",
+    "text": "Jenis pendingin CPU yang Anda inginkan?",
+    "options": ["Air Cooler (Udara)", "AIO Liquid Cooler (Cairan)"],
+    "logic_type": "SPECS_WEIGHT",
+    "logic_data": { "cooling_score": [1, 2] }
+  },
+  {
+    "id": "overclocking",
+    "text": "Apakah Anda berencana melakukan overclocking pada CPU?",
+    "options": ["Ya", "Tidak"],
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "motherboard", "column": "chipset", "values": ["%Z%", null] }
+  },
+  {
+    "id": "storage_secondary",
+    "text": "Apakah Anda butuh penyimpanan kedua (misal: HDD untuk data)?",
+    "options": ["Ya", "Tidak"],
+    "logic_type": "SPECS_WEIGHT",
+    "logic_data": { "storage_score": [2, 1] }
+  },
+  {
+    "id": "case_window",
+    "text": "Apakah casing harus memiliki panel samping transparan (tempered glass)?",
+    "options": ["Ya, wajib", "Tidak harus"],
+    "logic_type": "SPECS_WEIGHT",
+    "logic_data": { "case_score": [2, 1] }
+  },
+  {
+    "id": "wifi_onboard",
+    "text": "Apakah motherboard harus memiliki Wi-Fi bawaan?",
+    "options": ["Ya", "Tidak"],
+    "logic_type": "COMPONENT_FILTER",
+    "logic_data": { "table": "motherboard", "column": "nama_produk", "values": ["%WIFI%", null] }
+  },
+  {
+    "id": "gpu_rt_performance",
+    "text": "Seberapa penting performa Ray Tracing (RT) untuk gaming?",
+    "options": ["Sangat penting", "Cukup penting", "Tidak penting"],
+    "logic_type": "SPECS_WEIGHT",
+    "logic_data": { "gpu_score": [3, 2, 1] }
+  },
+  {
+    "id": "form_factor_priority",
+    "text": "Prioritas utama Anda dalam memilih ukuran PC?",
+    "options": ["Ukuran sekecil mungkin", "Keseimbangan ukuran dan upgradeability", "Upgradeability maksimal, ukuran tidak masalah"],
+    "logic_type": "SPECS_WEIGHT",
+    "logic_data": { "case_score": [3, 2, 1] }
+  },
+  {
+    "id": "dummy_26", "text": "Pertanyaan 26: Apa preferensi Anda untuk slot M.2 di motherboard?", "options": ["Cukup satu", "Minimal dua", "Tiga atau lebih"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_27", "text": "Pertanyaan 27: Apakah Anda memerlukan port Thunderbolt di motherboard?", "options": ["Ya", "Tidak"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_28", "text": "Pertanyaan 28: Bagaimana preferensi Anda terhadap tingkat kebisingan kipas?", "options": ["Sangat senyap", "Sedang", "Tidak masalah"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_29", "text": "Pertanyaan 29: Apakah merek PSU (Power Supply) penting bagi Anda?", "options": ["Sangat penting", "Cukup penting", "Tidak penting"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_30", "text": "Pertanyaan 30: Apakah Anda butuh output display lebih dari 3 monitor?", "options": ["Ya", "Tidak"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_31", "text": "Pertanyaan 31: Preferensi warna casing?", "options": ["Hitam", "Putih", "Warna lain"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_32", "text": "Pertanyaan 32: Apakah Anda sering melakukan upgrade komponen?", "options": ["Sangat sering", "Jarang", "Tidak pernah"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_33", "text": "Pertanyaan 33: Seberapa penting efisiensi daya (sertifikasi 80 Plus)?", "options": ["Penting (Gold/Platinum)", "Cukup (Bronze)", "Tidak terlalu penting"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_34", "text": "Pertanyaan 34: Apakah Anda butuh audio onboard berkualitas tinggi?", "options": ["Ya", "Standar cukup"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_35", "text": "Pertanyaan 35: Apakah Anda akan menggunakan PC untuk virtual reality (VR)?", "options": ["Ya", "Tidak"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_36", "text": "Pertanyaan 36: Preferensi jumlah port USB di panel depan casing?", "options": ["Minimal 2", "Minimal 4"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_37", "text": "Pertanyaan 37: Apakah Anda memerlukan LAN port dengan kecepatan 2.5G atau lebih?", "options": ["Ya", "1G sudah cukup"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_38", "text": "Pertanyaan 38: Estetika internal (manajemen kabel, dll) penting?", "options": ["Sangat penting", "Tidak terlalu"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_39", "text": "Pertanyaan 39: Apakah Anda akan menggunakan kartu ekspansi selain VGA (e.g. sound card, capture card)?", "options": ["Ya", "Tidak"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_40", "text": "Pertanyaan 40: Seberapa penting garansi komponen bagi Anda?", "options": ["Sangat penting", "Cukup penting", "Tidak penting"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_41", "text": "Pertanyaan 41: Apakah Anda lebih suka membeli dari satu merek (ekosistem)?", "options": ["Ya", "Tidak, campur tidak masalah"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_42", "text": "Pertanyaan 42: Apakah PC akan ditempatkan di ruang ber-AC?", "options": ["Ya", "Tidak"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_43", "text": "Pertanyaan 43: Seberapa sering Anda membersihkan bagian dalam PC?", "options": ["Rutin sebulan sekali", "Beberapa bulan sekali", "Jarang sekali"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_44", "text": "Pertanyaan 44: Apakah Anda butuh kemampuan dual-boot (misal: Windows & Linux)?", "options": ["Ya", "Tidak"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_45", "text": "Pertanyaan 45: Preferensi Anda pada desain GPU?", "options": ["Desain standar", "Desain dengan backplate", "Desain dengan waterblock"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_46", "text": "Pertanyaan 46: Apakah Anda akan merakit sendiri atau menggunakan jasa rakit?", "options": ["Rakit sendiri", "Jasa rakit"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_47", "text": "Pertanyaan 47: Seberapa penting dukungan software dari produsen motherboard?", "options": ["Sangat penting", "Tidak terlalu"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_48", "text": "Pertanyaan 48: Apakah Anda memiliki hewan peliharaan (terkait debu/bulu)?", "options": ["Ya", "Tidak"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_49", "text": "Pertanyaan 49: Apakah Anda butuh PC yang mudah dibawa-bawa (portable)?", "options": ["Ya", "Tidak, akan menetap"], "logic_type": "DUMMY"
+  },
+  {
+    "id": "dummy_50", "text": "Pertanyaan 50: Apa game utama yang akan Anda mainkan?", "options": ["eSports (Valorant, CS)", "AAA (Cyberpunk, Alan Wake 2)", "Strategy (Civilization, StarCraft)"], "logic_type": "DUMMY"
+  }
+]
