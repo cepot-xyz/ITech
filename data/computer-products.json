@@ -1,0 +1,94 @@
+{
+  "products": [
+    {
+      "id": "pc1",
+      "name": "Basic Office Build",
+      "price": 6500000,
+      "specs": {
+        "cpu": "Intel Core i3-12100",
+        "cpu_brand": "Intel",
+        "gpu": "Intel UHD 730",
+        "ram": 8,
+        "storage": 512,
+        "storage_type": "ssd",
+        "storage_total": 512,
+        "form_factor": "matx"
+      },
+      "url": "https://www.example.com/pc1",
+      "img": "basic-office.jpg",
+      "description": "PC rakitan ekonomis untuk kebutuhan office dan browsing sehari-hari"
+    },
+    {
+      "id": "pc2",
+      "name": "Gaming Mid-Range",
+      "price": 12500000,
+      "specs": {
+        "cpu": "AMD Ryzen 5 5600X",
+        "cpu_brand": "AMD",
+        "gpu": "NVIDIA RTX 3060 12GB",
+        "ram": 16,
+        "storage": 1000,
+        "storage_type": "nvme",
+        "storage_total": 1000,
+        "form_factor": "atx"
+      },
+      "url": "https://www.example.com/pc2",
+      "img": "gaming-mid.jpg",
+      "description": "Setup gaming 1440p dengan performa optimal untuk game modern"
+    },
+    {
+      "id": "pc3",
+      "name": "Content Creator Pro",
+      "price": 22500000,
+      "specs": {
+        "cpu": "AMD Ryzen 9 5900X",
+        "cpu_brand": "AMD",
+        "gpu": "NVIDIA RTX 3080 10GB",
+        "ram": 32,
+        "storage": 2000,
+        "storage_type": "nvme",
+        "storage_total": 2000,
+        "form_factor": "atx"
+      },
+      "url": "https://www.example.com/pc3",
+      "img": "creator-pro.jpg",
+      "description": "Workstation performa tinggi untuk content creation dan gaming enthusiast"
+    },
+    {
+      "id": "pc4",
+      "name": "Mini ITX Gaming",
+      "price": 15500000,
+      "specs": {
+        "cpu": "Intel Core i5-12600K",
+        "cpu_brand": "Intel",
+        "gpu": "NVIDIA RTX 3070 8GB",
+        "ram": 16,
+        "storage": 1000,
+        "storage_type": "nvme",
+        "storage_total": 1000,
+        "form_factor": "itx"
+      },
+      "url": "https://www.example.com/pc4",
+      "img": "mini-gaming.jpg",
+      "description": "Build kompak dengan performa gaming tinggi dalam format mini ITX"
+    },
+    {
+      "id": "pc5",
+      "name": "Professional Workstation",
+      "price": 35000000,
+      "specs": {
+        "cpu": "AMD Threadripper 3960X",
+        "cpu_brand": "AMD",
+        "gpu": "NVIDIA RTX 3090 24GB",
+        "ram": 64,
+        "storage": 4000,
+        "storage_type": "nvme",
+        "storage_total": 4000,
+        "form_factor": "full"
+      },
+      "url": "https://www.example.com/pc5",
+      "img": "pro-workstation.jpg",
+      "description": "Workstation profesional untuk rendering, simulasi, dan beban kerja berat"
+    }
+  ]
+}
